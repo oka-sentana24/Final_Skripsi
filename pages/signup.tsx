@@ -3,13 +3,15 @@ import Router from 'next/router'
 import Layout from '../components/Layout'
 
 const SignUp: React.FC = () => {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
+  // const [name, setName] = useState('')
+  // const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
     try {
-      const body = { name, email }
+      const body = { username, password }
       await fetch(`http://localhost:3000/api/user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -27,21 +29,35 @@ const SignUp: React.FC = () => {
         <form
           onSubmit={submitData}>
           <h1>Signup user</h1>
-          <input
+          {/* <input
             autoFocus
             onChange={e => setName(e.target.value)}
             placeholder="Name"
             type="text"
             value={name}
+          /> */}
+          <input
+            autoFocus
+            onChange={e => setUsername(e.target.value)}
+            placeholder="username"
+            type="text"
+            value={username}
           />
           <input
+            autoFocus
+            onChange={e => setPassword(e.target.value)}
+            placeholder="password"
+            type="text"
+            value={password}
+          />
+          {/* <input
             onChange={e => setEmail(e.target.value)}
             placeholder="Email address"
             type="text"
             value={email}
-          />
+          /> */}
           <input
-            disabled={!name || !email}
+            disabled={!username || !password}
             type="submit"
             value="Signup"
           />
